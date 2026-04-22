@@ -63,7 +63,12 @@ if st.checkbox("Show Filtered Data", True):
 row2_col1, row2_col2 = st.columns([1,1])
 
 
-row2_col2.write("col2")
+fig2, ax2 = plt.subplots(figsize=((8, 3.7)))
+ax2.scatter(filtered_data["borrower_rate"], filtered_data[variable], alpha=0.3, color="#8da0cb", s=10)
+ax2.set_xlabel("borrower_rate")
+ax2.set_ylabel(variable)
+
+row2_col2.pyplot(fig2)
 
 
 barplotdata = filtered_data[["loan_default",variable]].groupby("loan_default").mean()
