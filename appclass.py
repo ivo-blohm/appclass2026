@@ -63,10 +63,18 @@ if st.checkbox("Show Filtered Data", True):
 row2_col1, row2_col2 = st.columns([1,1])
 
 
+plot_bg = "#1a1f2e"
+text_color = "#e0e0e0"
+
 fig2, ax2 = plt.subplots(figsize=((8, 3.7)))
+fig2.patch.set_facecolor(plot_bg)
+ax2.set_facecolor(plot_bg)
 ax2.scatter(filtered_data["borrower_rate"], filtered_data[variable], alpha=0.3, color="#8da0cb", s=10)
-ax2.set_xlabel("borrower_rate")
-ax2.set_ylabel(variable)
+ax2.set_xlabel("borrower_rate", color=text_color)
+ax2.set_ylabel(variable, color=text_color)
+ax2.tick_params(colors=text_color)
+for spine in ax2.spines.values():
+    spine.set_edgecolor(text_color)
 
 row2_col2.pyplot(fig2)
 
@@ -74,8 +82,13 @@ row2_col2.pyplot(fig2)
 barplotdata = filtered_data[["loan_default",variable]].groupby("loan_default").mean()
 
 fig1, ax1 = plt.subplots(figsize=((8, 3.7)))
+fig1.patch.set_facecolor(plot_bg)
+ax1.set_facecolor(plot_bg)
 ax1.bar(barplotdata.index.astype(str), barplotdata[variable], color="#fc8d62")
-ax1.set_ylabel(variable)
+ax1.set_ylabel(variable, color=text_color)
+ax1.tick_params(colors=text_color)
+for spine in ax1.spines.values():
+    spine.set_edgecolor(text_color)
 
 row2_col1.pyplot(fig1)
 
